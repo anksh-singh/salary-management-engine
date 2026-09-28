@@ -97,3 +97,17 @@ Domain Rules
 Repositories
    ↓
 Relational Database
+
+
+## Open Architectural Decisions
+
+Deployment details remain the only externally dependent decision.
+
+The following product decisions have been clarified:
+
+- Compensation: annual gross base salary for full-time employees
+- Currency: local currency; no conversion required
+- Salary lifecycle: current salary only
+- Authentication: not required
+- Authorization: single authorized HR Manager
+- Compensation insights: candidate-defined focused set

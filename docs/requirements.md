@@ -30,16 +30,41 @@ The initial product is intentionally designed around this single persona rather 
 * Update an employee's salary through a controlled workflow.
 * Validate salary-related inputs before persistence.
 
+
+## Compensation Model
+
+The system models **annual gross base salary for full-time employees**.
+
+Salary is stored together with its currency. The initial release retains each employee's local currency and does not perform currency conversion.
+
+This avoids introducing exchange-rate management and prevents cross-currency comparisons from presenting misleading monetary values.
+
+## Salary Lifecycle
+
+The initial release manages the employee's **current salary only**.
+
+Salary history and effective-dated compensation changes are intentionally excluded because they are not required for the core HR workflow and would introduce additional temporal business rules.
+
+The data model remains structured so historical compensation can be introduced later without redesigning the employee domain.
+
+
 #### Compensation Insights
 
-Provide useful organizational-level views that help answer questions such as:
+The initial release will provide a focused set of HR-oriented insights:
 
-* What is the organization's overall salary distribution?
-* How does compensation vary across countries?
-* How does compensation vary across departments or roles?
-* What are the average, median, minimum, and maximum salaries within a selected population?
+- Employee count
+- Salary distribution within a currency
+- Average salary within a currency
+- Median salary within a currency
+- Minimum and maximum salary within a currency
+- Breakdown by country
+- Breakdown by department
+- Breakdown by job title
 
-Where salary comparisons span countries with different currencies, the system will clearly distinguish monetary values rather than presenting incomparable amounts as though they share the same unit.
+Monetary statistics will be calculated within a currency context. The system will not aggregate amounts across currencies.
+
+The insight set is intentionally focused on common compensation-management questions rather than attempting to build a general-purpose reporting platform.
+
 
 #### Data Initialization
 
@@ -64,23 +89,20 @@ Business rules and data transformations should be represented explicitly enough 
 
 The architecture should comfortably support 10,000 employees while avoiding infrastructure and abstractions whose complexity is not justified by the current requirements.
 
-## 5. Non-Goals / Deliberately Out of Scope
+## Deliberately Out of Scope
 
-The following are intentionally excluded from the initial release unless clarified as required:
-
-* Payroll processing or salary disbursement.
-* Tax calculation and statutory compliance.
-* Benefits administration.
-* Employee self-service.
-* Performance management.
-* Recruitment or onboarding workflows.
-* Complex role-based access-control hierarchies.
-* Real-time collaboration.
-* Notifications and workflow automation.
-* Currency exchange-rate management.
-* Distributed/microservice architecture.
-
-These exclusions keep the assessment focused on salary management and compensation insight while leaving room for future evolution.
+- Authentication and authorization
+- Salary history
+- Currency conversion / FX management
+- Payroll processing
+- Tax calculation
+- Benefits administration
+- Employee self-service
+- Performance management
+- Recruitment/onboarding
+- Notifications
+- Real-time collaboration
+- Advanced reporting/custom report builders
 
 ## 6. Key Assumptions
 
