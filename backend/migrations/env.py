@@ -5,12 +5,14 @@ from sqlalchemy import engine_from_config, pool
 
 from app.config import get_settings
 from app.database import Base
+from app.employees.models import Employee
 
 config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-config.set_main_option("sqlalchemy.url", get_settings().sqlalchemy_url.render_as_string(hide_password=False))
+database_url = get_settings().sqlalchemy_url.render_as_string(hide_password=False)
+config.set_main_option("sqlalchemy.url", database_url.replace("%", "%%"))
 target_metadata = Base.metadata
 
 
