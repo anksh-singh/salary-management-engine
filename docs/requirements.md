@@ -106,7 +106,7 @@ The architecture should comfortably support 10,000 employees while avoiding infr
 
 ## 6. Key Assumptions
 
-* The primary user is an authorized HR Manager.
+* The application assumes a single authorized HR Manager as the user persona; no authentication or authorization mechanism is implemented.
 * The system manages salary information rather than executing payroll.
 * The organization contains employees across multiple countries.
 * Salary data may involve multiple currencies; monetary values must therefore retain their currency context.
@@ -129,18 +129,9 @@ The solution is successful when an HR Manager can:
 
 From an engineering perspective, the system should demonstrate clear design reasoning, maintainable code, meaningful tests, intentional AI usage, and an architecture proportionate to the problem.
 
-## 8. Open Questions
+## 8. Remaining Open Question
 
-The assessment leaves several product decisions unspecified. Before implementation, the following should be clarified where necessary:
-
-1. **Salary representation:** Should salary be represented as annual compensation, monthly compensation, or another defined unit?
-2. **Multi-currency analysis:** Should cross-country compensation analysis use local currencies only, or should the system normalize values into a common currency?
-3. **Salary history:** Should salary changes maintain historical records, or is the current salary sufficient?
-4. **Analytics scope:** What specific organizational compensation questions are expected beyond basic aggregation and comparison?
-5. **Authentication:** Should authentication/authorization be implemented, or can the application assume an authorized HR Manager?
-6. **Deployment:** Is there a preferred deployment environment, or is any publicly accessible deployment acceptable?
-
-These questions are intentionally separated from assumptions so that unresolved product decisions are not silently encoded into the implementation.
+Deployment is the only remaining externally dependent decision: is there a preferred deployment environment, or is any publicly accessible deployment acceptable?
 
 ## 9. Engineering Scope
 

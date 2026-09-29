@@ -97,6 +97,7 @@ Domain Rules
 Repositories
    ↓
 Relational Database
+```
 
 
 ## Open Architectural Decisions
@@ -107,7 +108,6 @@ The following product decisions have been clarified:
 
 - Compensation: annual gross base salary for full-time employees
 - Currency: local currency; no conversion required
-- Salary lifecycle: current salary only
-- Authentication: not required
-- Authorization: single authorized HR Manager
+- Salary lifecycle: current salary only; history is optional and excluded from v1
 - Compensation insights: candidate-defined focused set
+- User: a single authorized HR Manager persona; no authentication or authorization mechanism is implemented
