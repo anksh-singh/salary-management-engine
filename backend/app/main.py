@@ -5,10 +5,12 @@ from starlette.responses import JSONResponse
 
 from app.compensation.router import router as compensation_router
 from app.employees.router import router as employees_router
+from app.insights.router import router as insights_router
 
 app = FastAPI(title="Salary Management System API")
 app.include_router(employees_router, prefix="/api/v1")
 app.include_router(compensation_router, prefix="/api/v1")
+app.include_router(insights_router, prefix="/api/v1")
 
 _NOT_FOUND_ERRORS = {
     "employee_not_found": "Employee not found",
