@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   agentRules: false,
+  basePath: "/salary",
   async rewrites() {
     const backendUrl = process.env.BACKEND_API_URL;
     if (!backendUrl) {
