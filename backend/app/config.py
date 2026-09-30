@@ -11,7 +11,10 @@ class Settings(BaseSettings):
 
     @property
     def sqlalchemy_url(self) -> URL:
-        return make_url(self.database_url)
+        url = make_url(self.database_url)
+        if url.drivername in {"postgres", "postgresql"}:
+            return url.set(drivername="postgresql+psycopg")
+        return url
 
 
 @lru_cache
