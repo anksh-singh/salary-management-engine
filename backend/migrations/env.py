@@ -5,6 +5,7 @@ from sqlalchemy import engine_from_config, pool
 
 from app.config import get_settings
 from app.database import Base
+from app.compensation.models import Compensation
 from app.employees.models import Employee
 
 config = context.config

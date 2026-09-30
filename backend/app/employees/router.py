@@ -5,10 +5,10 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import func, or_, select
 from sqlalchemy.orm import Session
 
+from app.api.schemas import ApiErrorResponse
 from app.database import get_session
 from app.employees.models import Employee
 from app.employees.schemas import (
-    ApiErrorResponse,
     EmployeeListResponse,
     EmployeePagination,
     EmployeeResponse,

@@ -3,10 +3,17 @@ from fastapi.exceptions import RequestValidationError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from starlette.responses import JSONResponse
 
+from app.compensation.router import router as compensation_router
 from app.employees.router import router as employees_router
 
 app = FastAPI(title="Salary Management System API")
 app.include_router(employees_router, prefix="/api/v1")
+app.include_router(compensation_router, prefix="/api/v1")
+
+_NOT_FOUND_ERRORS = {
+    "employee_not_found": "Employee not found",
+    "compensation_not_found": "Compensation not found",
+}
 
 
 @app.exception_handler(RequestValidationError)
@@ -33,12 +40,9 @@ async def request_validation_error_handler(request: Request, exc: RequestValidat
 
 @app.exception_handler(StarletteHTTPException)
 async def http_error_handler(request: Request, exc: StarletteHTTPException) -> JSONResponse:
-    employee_not_found = {
-        "code": "employee_not_found",
-        "message": "Employee not found",
-    }
-    if exc.status_code == 404 and exc.detail == employee_not_found:
-        error = employee_not_found
+    code = exc.detail.get("code") if isinstance(exc.detail, dict) else None
+    if exc.status_code == 404 and code in _NOT_FOUND_ERRORS:
+        error = {"code": code, "message": _NOT_FOUND_ERRORS[code]}
     else:
         error = {
             "code": "http_error",
